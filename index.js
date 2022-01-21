@@ -12,7 +12,7 @@ const server = http.createServer(function (req, res) {
 
     res.statusCode = 200;
     res.setHeader("Content-Type", "text/html");
-    res.setHeader("access-control-allow-origin","*");
+    res.setHeader("access-control-allow-origin", "*");
 
     if (req.url === "/music") {
         fs.readFile("index.html", function (error, file) {
@@ -29,6 +29,10 @@ const server = http.createServer(function (req, res) {
             startMusic(data.url);
         });
         res.end();
+    } else if (req.url === "/stopMusic") {
+        console.log("eee")
+        stopMusic();
+        res.end();
     } else {
         res.end();
     }
@@ -44,9 +48,20 @@ server.listen(port, hostname, function () {
 
 
 function startMusic(str) {
-    const command = "export DISPLAY=:0 && firefox " + str;
-    console.log(command)
+    const command = "export DISPLAY=:0 && firefox --headless " + str;
     exec(command, (err, stdout, stderr) => {
+        console.log(command);
+        if (err) {
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+    });
+}
+
+function stopMusic() {
+    const command = "pkill -f firefox";
+    exec(command, (err, stdout, stderr) => {
+        console.log(command);
         if (err) {
             return;
         }
