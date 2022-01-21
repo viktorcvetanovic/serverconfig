@@ -9,7 +9,15 @@
         }
     </style>
     <script>
-        function sendMusic() {
+        function volumeUp() {
+            let volume = document.getElementById("volume").value;
+            fetch('http://192.168.18.171:3333/volume', {
+                method: 'POST',
+                body: JSON.stringify({"volume":volume})
+            });
+    }
+
+    function sendMusic() {
             let url = document.getElementById("music").value;
             fetch('http://192.168.18.171:3333/playMusic', {
                 method: 'POST',
@@ -31,7 +39,9 @@
 
 </form>
 <input id="music" style="width: 600px"></br></br>
+<input id="volume" type="number">
 <button id="playMusic" onclick="sendMusic()">Pusti muziku</button>
 <button onclick="stopMusic()">Ugasi muziku</button>
+<button onclick="volumeUp()">PojacajMuziku</button>
 </body>
 </html>

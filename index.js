@@ -13,7 +13,7 @@ const server = http.createServer(function (req, res) {
     res.statusCode = 200;
     res.setHeader("Content-Type", "text/html");
     res.setHeader("access-control-allow-origin", "*");
-
+    console.log(req.url)
     if (req.url === "/music") {
         fs.readFile("index.html", function (error, file) {
             res.write(file, "binary");
@@ -33,6 +33,19 @@ const server = http.createServer(function (req, res) {
         console.log("eee")
         stopMusic();
         res.end();
+    } else if (req.url === "/volume") {
+        var jsonString = '';
+
+        req.on('data', function (data) {
+            jsonString += data;
+        });
+
+        req.on('end', function () {
+            var data = JSON.parse(jsonString);
+            console.log(data);
+            volumeUp(data.volume);
+        });
+        res.end();
     } else {
         res.end();
     }
@@ -41,20 +54,18 @@ const server = http.createServer(function (req, res) {
 });
 
 server.listen(port, hostname, function () {
-
     console.log('Server running at http://' + hostname + ':' + port + '/');
 
 });
 
 
 function startMusic(str) {
-    const command = "export DISPLAY=:0 && firefox --headless " + str;
+    const command = "export DISPLAY=:0 && firefox " + str;
     exec(command, (err, stdout, stderr) => {
         console.log(command);
         if (err) {
             return;
         }
-        console.log(`stdout: ${stdout}`);
     });
 }
 
@@ -65,6 +76,16 @@ function stopMusic() {
         if (err) {
             return;
         }
-        console.log(`stdout: ${stdout}`);
     });
 }
+
+function volumeUp(volume) {
+    const command = "amixer set Master " + volume + "%";
+    exec(command, (err, stdout, stderr) => {
+        console.log(command);
+        if (err) {
+            return;
+        }
+    });
+}
+
