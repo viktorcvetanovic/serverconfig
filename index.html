@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Muzika| ISUM </title>
+    <style>
+        * {
+            text-align: center;
+        }
+    </style>
+    <script>
+        function sendMusic() {
+            let url = document.getElementById("music").value;
+            fetch('http://192.168.18.171:3333/playMusic', {
+                method: 'POST',
+                body: JSON.stringify({"url":url})
+            });
+        }
+    </script>
+</head>
+<body>
+<h1>Muzika isum</h1>
+<form method="GET">
+
+
+</form>
+<input id="music" style="width: 600px"></br></br>
+<button id="playMusic" onclick="sendMusic()">Pusti muziku</button>
+</body>
+</html>
