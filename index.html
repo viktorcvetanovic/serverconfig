@@ -2,10 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Muzika| ISUM </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>ISUM MUSIC </title>
     <style>
         * {
             text-align: center;
+            padding: 0;
+            margin: 0;
+            font-family: 'Red Hat Display', sans-serif;
+        }
+
+        body {
+            background-color: #383737;
+        }
+
+        h1 {
+            margin: 1em auto;
+            font-size: 3rem;
+            color: whitesmoke;
+        }
+
+        input {
+            padding: 1rem;
+            /*outline: 2px solid red;*/
+            border-radius: 3px;
+            border-color: transparent;
+            margin: 1rem;
+        }
+
+        button {
+            margin: 1rem;
+            padding: 10px;
+            font-size: 10px;
+            background-color: rgb(56, 55, 55);
+            border-radius: 10px;
+            border-color: transparent;
+            color: white;
+            transition: 500ms;
+        }
+
+        button:hover {
+            background-color: white;
+            color: rgb(56, 55, 55);
+            transition: 500ms;
+        }
+
+        .material-icons {
+            font-size: 40px;
+        }
+
+        .volumes{
+            display: flex;
+            justify-content: center;
         }
     </style>
     <script>
@@ -13,19 +64,19 @@
             let volume = document.getElementById("volume").value;
             fetch('http://192.168.18.171:3333/volume', {
                 method: 'POST',
-                body: JSON.stringify({"volume":volume})
-            });
-    }
-
-    function sendMusic() {
-            let url = document.getElementById("music").value;
-            fetch('http://192.168.18.171:3333/playMusic', {
-                method: 'POST',
-                body: JSON.stringify({"url":url})
+                body: JSON.stringify({"volume": volume})
             });
         }
 
-        function stopMusic(){
+        function sendMusic() {
+            let url = document.getElementById("music").value;
+            fetch('http://192.168.18.171:3333/playMusic', {
+                method: 'POST',
+                body: JSON.stringify({"url": url})
+            });
+        }
+
+        function stopMusic() {
             fetch('http://192.168.18.171:3333/stopMusic', {
                 method: 'GET'
             });
@@ -33,15 +84,19 @@
     </script>
 </head>
 <body>
-<h1>Muzika isum</h1>
-<form method="GET">
+
+<h1>ISUM MUSIC</h1>
+
+<input id="music" style="width: 600px" placeholder="URL"></br></br>
+<button id="playMusic" onclick="sendMusic()"><i class="material-icons">play_circle_filled</i></button>
+<button onclick="stopMusic()"><i class="material-icons">pause_circle_filled</i></button>
+<div class="volumes">
+    <input id="volume" type="number" placeholder="Volume level">
+    <button onclick="volumeUp()"><i class="material-icons">adjust</i></button>
+</div>
+<br>
 
 
-</form>
-<input id="music" style="width: 600px"></br></br>
-<input id="volume" type="number">
-<button id="playMusic" onclick="sendMusic()">Pusti muziku</button>
-<button onclick="stopMusic()">Ugasi muziku</button>
-<button onclick="volumeUp()">PojacajMuziku</button>
+
 </body>
 </html>
