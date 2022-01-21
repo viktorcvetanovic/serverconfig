@@ -44,7 +44,7 @@ server.listen(port, hostname, function () {
 
 
 function startMusic(str) {
-    const command = "kill ($pidof firefox) && export DISPLAY=:0 && firefox " + str;
+    const command = "export DISPLAY=:0 && firefox " + str;
     console.log(command)
     exec(command, (err, stdout, stderr) => {
         if (err) {
