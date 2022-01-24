@@ -14,15 +14,72 @@
             --large: 55px;
             --bar-height: 10px;
             --gradient: radial-gradient(rgb(59, 28, 31), rgba(35, 25, 25, 0.63));
-            --text: linear-gradient(rgba(145, 63, 63, 0.7), rgba(0,0,0,0.1));
+            --text: linear-gradient(rgba(145, 63, 63, 0.7), rgba(0, 0, 0, 0.1));
+            --bar: #3333;
         }
 
+        @keyframes bar1 {
+            0% {
+                transform: scaleY(1);
+            }
+            25% {
+                transform: scaleY(1.9);
+            }
+            75% {
+                transform: scaleY(0.8);
+            }
+            100% {
+                transform: scaleY(1);
+            }
+        }
+
+        @keyframes bar2 {
+            0% {
+                transform: scaleY(1);
+            }
+            25% {
+                transform: scaleY(1.8);
+            }
+            75% {
+                transform: scaleY(2.4);
+            }
+            100% {
+                transform: scaleY(1);
+            }
+        }
+
+        @keyframes bar3 {
+            0% {
+                transform: scaleY(1);
+            }
+            25% {
+                transform: scaleY(2);
+            }
+            75% {
+                transform: scaleY(1.9);
+            }
+            100% {
+                transform: scaleY(1);
+            }
+        }
+
+        @keyframes bar4 {
+            0% {
+                transform: scaleY(1);
+            }
+            50% {
+                transform: scaleY(0.6);
+            }
+            100% {
+                transform: scaleY(1);
+            }
+        }
 
         @keyframes moving {
-            0%{
+            0% {
                 background-position: left;
             }
-            100%{
+            100% {
                 background-position: right;
             }
         }
@@ -32,25 +89,17 @@
             user-select: none;
             padding: 0;
             margin: 0;
-            background-image: url("https://cdn.wallpapersafari.com/12/77/iH6nMj.jpg");
-            background-repeat: repeat;
+            background-image: url("https://cutewallpaper.org/22/skyrim-4k-minimalistic-wallpapers/317212265.jpg");
+            background-repeat: no-repeat;
+            width: 100%;
+            height: auto;
         }
 
         h1 {
             text-align: center;
             font-size: 8rem;
-            color: whitesmoke;
+            color: #405478;
             /*animation: moving 2s infinite alternate;*/
-        }
-
-        #overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            z-index: 9999;
-            display: none;
         }
 
         .player {
@@ -67,7 +116,7 @@
 
         .player #music-info {
             padding: 15px;
-            background-image: var(--gradient);
+            background-color: #333333;
             animation: moving 1250ms infinite alternate;
             height: 238px;
             background-repeat: no-repeat;
@@ -113,7 +162,7 @@
             bottom: 0;
             width: 0;
             height: var(--bar-height);
-            background: #08e0fc;
+            background: #a71c2c;
             pointer-events: none;
         }
 
@@ -121,7 +170,7 @@
             content: "";
             width: 16px;
             height: 16px;
-            background: #08e0fc;
+            background: #ff3538;
             position: absolute;
             right: -8px;
             bottom: -4px;
@@ -149,21 +198,7 @@
             text-align: center;
             margin: 15px;
             color: #333;
-            transition: 500ms;
-        }
-
-        .player .buttons .button-small {
-            width: var(--small);
-            height: var(--small);
-            line-height: var(--small);
-            font-size: 4em;
-        }
-
-        .player .buttons .button-medium {
-            width: var(--medium);
-            height: var(--medium);
-            line-height: var(--medium);
-            font-size: 4em;
+            transition: 250ms;
         }
 
         .player .buttons .button-large {
@@ -171,17 +206,111 @@
             height: var(--large);
             line-height: var(--large);
             font-size: 4em;
-            transition: 500ms;
+            transition: 250ms;
         }
 
-        .player .buttons .button-small:hover, .player .buttons .button-medium:hover, .player .buttons .button-large:hover {
-            background: #171717;
+        .player .buttons .button-large:hover {
+            background: #9e2224;
             color: #fff;
-            transition: 500ms;
+            cursor: pointer;
+            transition: 250ms;
+            box-shadow: 0 0 5px 4px #333333;
         }
 
         .material-icons {
             font-size: 46px;
+        }
+
+        .bar1, .bar2, .bar3, .bar4, .bar5 {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .bar1 {
+            animation-name: bar1;
+            animation-duration: 0.5s;
+            animation-iteration-count: infinite;
+            transform-origin: bottom center;
+        }
+
+        .bar2 {
+            animation-name: bar2;
+            animation-duration: 0.3s;
+            animation-iteration-count: infinite;
+            transform-origin: bottom center;
+        }
+
+        .bar3 {
+            animation-name: bar4;
+            animation-duration: 0.6s;
+            animation-iteration-count: infinite;
+            transform-origin: bottom center;
+        }
+
+        .bar4 {
+            animation-name: bar4;
+            animation-duration: 0.5s;
+            animation-iteration-count: infinite;
+            transform-origin: bottom center;
+        }
+
+        .bar5 {
+            animation-name: bar1;
+            animation-duration: 0.5s;
+            animation-iteration-count: infinite;
+            transform-origin: bottom center;
+        }
+
+        .container-dark {
+            text-align: center;
+            margin-top: 2em;
+            font-size: 20px;
+            color: var(--bar);
+        }
+
+        svg rect {
+            fill: #ffffff;
+        }
+
+        svg rect:hover {
+            fill: #ff3538;
+        }
+
+        h1 span {
+            font-size: 7vw;
+            font-weight: 300;
+            transition: 250ms;
+            color: rgba(0, 0, 0, 0.75);
+        }
+
+        span:hover {
+            color: #ff3538;
+            font-weight: 500;
+            font-size: 7.5vw;
+            transition: 250ms;
+            text-shadow: 0 0 15px #d70e0e;
+        }
+
+        .search {
+            display: flex;
+            width: 100%;
+            padding: 1em 0;
+            background-color: #4b5b7f;
+            text-align: center;
+            font-size: 12px;
+            color: rgba(51, 51, 51, 1);
+            font-family: 'Red Hat Display', sans-serif;
+            transition: 500ms;
+            border: 0 solid transparent;
+            color: white;
+        }
+
+        .search:hover {
+            padding: 1em 0;
+            background-color: #db4849;
+            text-align: center;
+            color: white;
+            font-family: 'Red Hat Display', sans-serif;
+            transition: 500ms;
         }
 
     </style>
@@ -207,14 +336,57 @@
                 method: 'GET'
             });
         }
+        //
+        // function addSlider() {
+        //     let slider = document.getElementById("slider")
+        //
+        //     slider.style.display = "initial";
+        //
+        // }
     </script>
 </head>
 <body>
-<div id="overlay"></div>
-<h1>ISUM MUSIC</h1>
+<h1>
+    <span>I</span>
+    <span>S</span>
+    <span>U</span>
+    <span>M</span>
+    <span>&nbsp;</span>
+    <span>M</span>
+    <span>U</span>
+    <span>S</span>
+    <span>I</span>
+    <span>C</span>
+</h1>
+
 <div class="container">
     <div class="player" id="player">
+
+        <label>
+            <input type="url" class="search">
+        </label>
         <div id="music-info">
+            <div class="container-dark">
+                <svg width="100px" height="100px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <g id="CMG-Persistent-Player" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="CMG-Persistent-Player---Music---Collapsed"
+                           transform="translate(-1015.000000, -1074.000000)" fill="#EC057E">
+                            <g id="Group" transform="translate(1015.000000, 1074.000000)">
+                                <rect id="Rectangle" x="5.05263158" y="17.6842105" width="3.78947368"
+                                      height="6.31578947" class="bar2"></rect>
+                                <rect id="Rectangle" x="0" y="11.3684211" width="3.78947368" height="12.6315789"
+                                      class="bar1"></rect>
+                                <rect id="Rectangle" x="10.1052632" y="3.78947368" width="3.78947368"
+                                      height="20.2105263" class="bar3"></rect>
+                                <rect id="Rectangle" x="15.1578947" y="0" width="3.78947368" height="24"
+                                      class="bar4"></rect>
+                                <rect id="Rectangle" x="20.2105263" y="10.1052632" width="3.78947368"
+                                      height="13.8947368" class="bar5"></rect>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
             <div class="title"></div>
             <div class="author"></div>
             <div class="album"></div>
@@ -226,13 +398,17 @@
             </div>
         </div>
         <div class="buttons">
-            <div class="button button-small"><i class="material-icons">volume_off</i></div>
-            <div class="button button-medium"><i class="material-icons">skip_previous</i></div>
+            <div class="button button-large" id="mute"><i class="material-icons">volume_off</i></div>
+            <div class="button button-large" id="skip-previous"><i class="material-icons">skip_previous</i></div>
             <div class="button button-large" id="play" onclick="sendMusic()"><i class="material-icons">play_arrow</i>
             </div>
             <div class="button button-large" id="stop" onclick="stopMusic()"><i class="material-icons">stop</i></div>
-            <div class="button button-medium"><i class="material-icons">skip_next</i></div>
-            <div class="button button-small" id="mute"><i class="material-icons">volume_up</i></div>
+            <div class="button button-large" id="skip-next"><i class="material-icons">skip_next</i></div>
+            <div class="button button-large" id="volume" onclick="volumeUp()"><i class="material-icons">volume_up</i>
+            </div>
+            <label for="slider">
+                <input type="range" min="0" max="100" value="60" id="slider" onclick="volumeUp()">
+            </label>
         </div>
     </div>
 </div>
