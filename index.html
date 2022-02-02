@@ -315,8 +315,10 @@
 
     </style>
     <script>
-        function volumeUp() {
-            let volume = document.getElementById("volume").value;
+        let muted = false;
+        let musicVolume = 0;
+
+        function volumeUp(volume) {
             fetch('http://192.168.18.171:3333/volume', {
                 method: 'POST',
                 body: JSON.stringify({"volume": volume})
@@ -336,6 +338,21 @@
                 method: 'GET'
             });
         }
+
+        function volumeMute() {
+
+            musicVolume = document.getElementById('slider').value;
+            if (muted) {
+                document.getElementById('slider').style.color = "red";
+                volumeUp(musicVolume);
+            } else {
+                document.getElementById('slider').style.color = "transparent";
+                volumeUp(0);
+            }
+            muted = !muted;
+
+        }
+
         //
         // function addSlider() {
         //     let slider = document.getElementById("slider")
@@ -363,7 +380,7 @@
     <div class="player" id="player">
 
         <label>
-            <input type="url" class="search">
+            <input type="url" class="search" id="music">
         </label>
         <div id="music-info">
             <div class="container-dark">
@@ -398,16 +415,19 @@
             </div>
         </div>
         <div class="buttons">
-            <div class="button button-large" id="mute"><i class="material-icons">volume_off</i></div>
+            <div class="button button-large" id="mute"><i class="material-icons" onclick="volumeMute()">volume_off</i>
+            </div>
             <div class="button button-large" id="skip-previous"><i class="material-icons">skip_previous</i></div>
             <div class="button button-large" id="play" onclick="sendMusic()"><i class="material-icons">play_arrow</i>
             </div>
             <div class="button button-large" id="stop" onclick="stopMusic()"><i class="material-icons">stop</i></div>
             <div class="button button-large" id="skip-next"><i class="material-icons">skip_next</i></div>
-            <div class="button button-large" id="volume" onclick="volumeUp()"><i class="material-icons">volume_up</i>
+            <div class="button button-large" id="volume"><i
+                    class="material-icons">volume_up</i>
             </div>
             <label for="slider">
-                <input type="range" min="0" max="100" value="60" id="slider" onclick="volumeUp()">
+                <input type="range" min="0" max="100" value="60" id="slider"
+                       onclick="volumeUp(document.getElementById('slider').value)">
             </label>
         </div>
     </div>
